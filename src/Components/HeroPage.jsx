@@ -3,8 +3,9 @@ import {useState} from 'react'
 const HeroPage = () => {
     
   return (
-    <div>
+    <div >
        
+
     </div>
   )
 }

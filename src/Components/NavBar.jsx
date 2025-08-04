@@ -6,9 +6,13 @@ import logo from '/ultimate-log.png'
 const NavBar = () => {
     const [open, setOpen] = useState(false);
     const [searchToggle, setSearchToggle] = useState(false)
+    const [menuToggle, setMenuToggle] = useState(false)
 
     function handleSearchToggle() {
         setSearchToggle(!searchToggle)
+    }
+    function handleMenu() {
+      setMenuToggle(!menuToggle)
     }
     
   return (
@@ -33,13 +37,12 @@ const NavBar = () => {
       <button className="ml-2 text-gray-600 hover:text-black">
         <FiX className="w-6 h-6" onClick={() => handleSearchToggle(false)} />
       </button>
-    </div>
+   </div>
 
-
-      <header className='bg-blue-300 fixed right-0 left-0  '>
-        <nav className='flex justify-between items-center p-3'>
-            <div className='flex items-center gap-3'>
-                <img className='w-16 hidden  md:block' src={logo} alt="" />
+      {/* nav Bar */}
+    <header className='bg-[#ffffff] shadow-xl fixed right-0 left-0  md:top-0 '>
+      <nav className='flex justify-between items-center  p-4 '>
+            <div className='  '>
                 <span className=' text-3xl font-serif font-bold'>ULTIMATE</span>
             </div>
             <div className='hidden md:block'>
@@ -96,12 +99,12 @@ const NavBar = () => {
                 <FiShoppingCart className='w-8 h-8' />
                 <span className='hidden md:block'>Cart</span>
             </div>
-            <div>
-               <FiSearch className="w-8 h-8" onClick={handleSearchToggle} /> 
+            <div >
+               <FiSearch className="w-8 h-8 md:hidden" onClick={handleSearchToggle} /> 
             </div>
             </div>
             
-            <div>
+            <div onClick={handleMenu}>
                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="text-3xl lg:hidden" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                <path d="M4 6h16">
                 </path><path d="M7 12h13">
@@ -109,6 +112,30 @@ const NavBar = () => {
                 </path>
                </svg>
             </div>
+            {/* mobile  menu*/}
+              <div className={ `md:hidden bg-white min-h-screen fixed z-50 w-full h-full top-0 left-0 right-0 transition-transform duration-1000 ease-in-out
+              ${menuToggle? 'translate-x-0' : 'translate-x-full'} `}>
+            <div className=' m-8  '>
+                <div className='flex justify-between items-center mb-10 '>
+                    <span className=' text-3xl font-serif font-bold'>ULTIMATE</span> 
+                    <FiX className='w-10 h-10' onClick={() => handleMenu(false)}/>               
+                </div>
+                  <details className="group">
+                      <summary className="flex justify-between items-center cursor-pointer text-gray-700 font-medium ">
+                        Categories
+                        <HiChevronDown className="w-4 h-4 transition-transform duration-300 group-open:rotate-180" />
+                      </summary>
+                      <div className="mt-2 block pl-4 space-y-2 text-sm text-gray-600">
+                        <p><a href="#">Furniture</a></p>
+                        <p><a href="#">Shoes</a></p>
+                        <p><a href="#">Bag</a></p>
+                        <p><a href="#">Clothes</a></p>
+                      </div>
+                  </details>
+                    <p className='mt-3'>What's new</p>
+                    <p className='mt-3'>Delivery</p>
+              </div>
+                </div>
         </nav>
       </header>
     </div>
