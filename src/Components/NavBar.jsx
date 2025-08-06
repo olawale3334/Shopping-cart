@@ -3,9 +3,10 @@ import { useState } from 'react';
 import { HiChevronDown } from 'react-icons/hi';
 import { FiSearch, FiUser, FiShoppingCart, FiX } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-
+import { useCart } from './CartContext';
 
 const NavBar = () => {
+   const {totalQuantity} = useCart()
   const [open, setOpen] = useState(false);
   const [searchToggle, setSearchToggle] = useState(false);
   const [menuToggle, setMenuToggle] = useState(false);
@@ -76,9 +77,12 @@ const NavBar = () => {
               <div className="relative">
                 <Link to='/cart'>
                 <FiShoppingCart className="w-8 h-8" />
-                <span className="absolute -top-2 -right-2 bg-orange-700 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">
-                  0
+                {totalQuantity > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-orange-700 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">
+                  {totalQuantity}
                 </span>
+                )}
+                
                 </Link>
                 
               </div>
