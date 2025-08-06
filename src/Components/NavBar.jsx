@@ -2,8 +2,8 @@
 import { useState } from 'react';
 import { HiChevronDown } from 'react-icons/hi';
 import { FiSearch, FiUser, FiShoppingCart, FiX } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
-import logo from '/ultimate-log.png';
 
 const NavBar = () => {
   const [open, setOpen] = useState(false);
@@ -74,10 +74,13 @@ const NavBar = () => {
             </div>
             <div className="flex items-center gap-2">
               <div className="relative">
+                <Link to='/cart'>
                 <FiShoppingCart className="w-8 h-8" />
                 <span className="absolute -top-2 -right-2 bg-orange-700 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">
                   0
                 </span>
+                </Link>
+                
               </div>
               <span className="hidden md:block">Cart</span>
             </div>
