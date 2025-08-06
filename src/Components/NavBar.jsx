@@ -20,12 +20,12 @@ const NavBar = () => {
   return (
     <div>
       {/* nav Bar */}
-      <header className="shadow fixed right-0 left-0 top-0">
-        <nav className="flex justify-between items-center p-4">
-          <div>
-            <span className="text-3xl font-serif font-bold">ULTIMATE</span>
+      <header className="shadow z-50 fixed right-0 left-0 top-0 px-4 md:px-8">
+        <nav className="flex flex-wrap justify-between max-w-screen-xl mx-auto items-center lg:gap-4  p-4">
+          <div className='flex items-center'>
+            <span className="text-2xl md:text-3xl lg:text-4xl font-serif font-bold">ULTIMATE</span>
           </div>
-          <div className="hidden md:block">
+          <div className="hidden md:block lg:block">
             <div className="flex items-center gap-5">
               <div className="relative inline-block text-left">
                 <div
@@ -73,14 +73,20 @@ const NavBar = () => {
               <span className="hidden md:block">Account</span>
             </div>
             <div className="flex items-center gap-2">
-              <FiShoppingCart className="w-8 h-8" />
+              <div className="relative">
+                <FiShoppingCart className="w-8 h-8" />
+                <span className="absolute -top-2 -right-2 bg-orange-700 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">
+                  0
+                </span>
+              </div>
               <span className="hidden md:block">Cart</span>
             </div>
+
             <div>
               <FiSearch className="w-8 h-8 md:hidden" onClick={handleSearchToggle} />
             </div>
           </div>
-          <div onClick={handleMenu}>
+          <div className='' onClick={handleMenu}>
             <svg
               stroke="currentColor"
               fill="none"
@@ -88,7 +94,7 @@ const NavBar = () => {
               viewBox="0 0 24 24"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="text-3xl lg:hidden"
+              className="text-3xl md:hidden lg:hidden xl:hidden"
               height="1em"
               width="1em"
               xmlns="http://www.w3.org/2000/svg"
@@ -98,7 +104,7 @@ const NavBar = () => {
               <path d="M10 18h10" />
             </svg>
           </div>
-          {/* mobile search bar  */}
+          
           {/* mobile menu */}
           <div
             className={`md:hidden bg-white min-h-screen fixed z-50 w-full h-full top-0 left-0 right-0 transition-transform duration-1000 ease-in-out ${menuToggle ? 'translate-x-0' : 'translate-x-full'}`}
