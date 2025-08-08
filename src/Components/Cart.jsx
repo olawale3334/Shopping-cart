@@ -150,13 +150,13 @@ const Cart = () => {
                                 <button 
                                onClick={ () => addToCart(item)}
                                className='bg-black text-white px-8 py-2 rounded-md'>
-                                buy Again
+                                Buy Again
                                </button>
                               </div>                            
                             </div>
                         </div>
                         <div className='text-center mt-4 z-20'>
-                          <button className='bg-white shadow px-8 py-2 rounded text-xs'>Track package</button>
+                          <button className='bg-white shadow px-8 py-2 rounded '>Track package</button>
                         </div>
                         </div>
 

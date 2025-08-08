@@ -5,11 +5,16 @@ import { FiSearch, FiUser, FiShoppingCart, FiX } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { useCart } from './CartContext';
 
-const NavBar = () => {
+const NavBar = ({categories, product}) => {
+  console.log(product);
+  
    const {totalQuantity} = useCart()
   const [open, setOpen] = useState(false);
   const [searchToggle, setSearchToggle] = useState(false);
   const [menuToggle, setMenuToggle] = useState(false);
+ 
+     const [searchItems,setSearchItems] = useState()
+
 
   function handleSearchToggle(val) {
     setSearchToggle(typeof val === 'boolean' ? val : !searchToggle);
@@ -17,6 +22,20 @@ const NavBar = () => {
   function handleMenu(val) {
     setMenuToggle(typeof val === 'boolean' ? val : !menuToggle);
   }
+
+  function handleSearchInput(e) {
+    const value = e.target.value
+    setSearchItems(value)
+    
+    const checkCategory = categories.find( cat => cat.toLowerCase().includes(value.toLowerCase()));
+
+    if(checkCategory){
+      const machedproduct = product.filter(product => product.categorie === checkCategory)
+      setSearchItems(machedproduct)
+    } else{
+      setSearchItems([])
+    }
+  } 
 
   return (
     <div>
@@ -55,10 +74,23 @@ const NavBar = () => {
             <form action="">
               <div className="flex items-center w-[16rem] relative bg-gray-200 rounded-lg shadow-sm border focus-within:ring-2 focus-within:ring-gray-400 transition">
                 <input
+                value={searchItems}
+                onChange={handleSearchInput}
                   type="text"
-                  placeholder="Search items..."
+                  placeholder="Search category (e.g., shoes)..."
                   className="w-full p-2 pl-4 pr-12 text-sm rounded-lg outline-none bg-transparent"
                 />
+                {/* {searchItems.length > 0 && (
+                  <div>
+                    <h1>Product</h1>
+                  {searchItems.map(item =>(
+                    <div key={item.id}>
+                      <p>{item.name}</p>
+                    </div>
+                  ))}
+                  </div>
+                  
+                )} */}
                 <button
                   type="submit"
                   className="absolute right-0 top-1/2 -translate-y-1/2 bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-r-lg transition"

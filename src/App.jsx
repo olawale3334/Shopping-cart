@@ -28,6 +28,7 @@ import Cart from './Components/Cart'
 
 function App() {
   const categories = ['watch','shoe','clothes','phone']
+
  const [product] = useState([ 
   {
     id: 2,
@@ -193,7 +194,7 @@ function App() {
       <Route
           path="/"
           element={<>
-          <NavBar/>
+          <NavBar categories ={categories} product={product}/>
           <HeroPage />
           <Prouduct product={product} />
             </>
