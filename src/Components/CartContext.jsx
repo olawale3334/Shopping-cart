@@ -1,11 +1,18 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
  const cartContext = createContext()
  export const useCart = () => useContext(cartContext)
 
 const CartContext = ( {children}) => {
    
-   const [cart,setCart] = useState([])
+   const [cart,setCart] = useState(()=>{
+      const localstorage = localStorage.getItem('cart')
+      return localstorage ? JSON.parse(localstorage) : [];
+   })
 
+   useEffect(() =>{
+      localStorage.setItem('cart',JSON.stringify(cart))
+   },[cart])
+   
    const addToCart = (product) => {
      setCart((check)=>{
         const exist = check.find((item)=> item.id === product.id )
@@ -20,9 +27,10 @@ const CartContext = ( {children}) => {
         }
      })
    }
-
+      
+   
    const reduceFromCart = (product) => {
-     setCart((check)=>{
+      setCart((check)=>{
         const exist = check.find((item)=> item.id === product.id )
         if (exist) {
            return check.map((item) => 
@@ -36,13 +44,20 @@ const CartContext = ( {children}) => {
         
      })
    }
+
+   const handleDelete = (id) => {
+        setCart(cart.filter((item)=> item.id !== id))
+        
+         }
+       
+
       const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
       
 
 
   return (
     <div>
-       <cartContext.Provider value={{ cart,addToCart,  reduceFromCart,totalQuantity}}>
+       <cartContext.Provider value={{ cart,addToCart, handleDelete, reduceFromCart,totalQuantity}}>
         {children}
        </cartContext.Provider>
     </div>

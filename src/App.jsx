@@ -27,7 +27,7 @@ import { Routes,Route } from 'react-router-dom'
 import Cart from './Components/Cart'
 
 function App() {
-  const categories = ["men",'women','watch','shoe','clothes','phone']
+  const categories = ['watch','shoe','clothes','phone']
  const [product] = useState([ 
   {
     id: 2,
@@ -39,7 +39,7 @@ function App() {
   },
   
   {
-    id: "4",
+    id: 4,
     image: wat2,
     name: "Heavy watch",
     price: 9990,
@@ -48,7 +48,7 @@ function App() {
       
   },
   {
-    id: "5",
+    id: 5,
     image: wat1,
     name: "Pink watch",
      price: 9990,
@@ -57,7 +57,7 @@ function App() {
   },
   
    {
-  id: "24",
+  id: 24,
     image: phone4 ,
     name: "Iphone 13",
      price: 87054,
@@ -67,7 +67,7 @@ function App() {
  
 
   {
-    id: "15",
+    id: 15,
     image: wat4,
     name: " Black watch",
      price: 9990,
@@ -75,7 +75,7 @@ function App() {
     
   },
   {
-  id: "21",
+  id: 21,
     image: phone1 ,
     name: "Iphone 10",
      price: 15090,
@@ -83,7 +83,7 @@ function App() {
     
   },
   {
-  id: "22",
+  id: 22,
     image: phone2 ,
     name: "Iphone 11",
      price: 40090,
@@ -91,7 +91,7 @@ function App() {
     
   },
   {
-  id: "23",
+  id: 23,
     image: phone3 ,
     name: "Iphone 8",
      price: 10590,
@@ -99,7 +99,7 @@ function App() {
     
   },
    {
-  id: "26",
+  id: 26,
     image: shoe5 ,
     name: "Arthletic Sneakers men",
      price: 3890,
@@ -107,7 +107,7 @@ function App() {
     
   },
    {
-  id: "25",
+  id: 25,
     image: shoe4 ,
     name: "Athletic Sneakers",
      price: 3990,
@@ -115,7 +115,7 @@ function App() {
     
   },
    {
-  id: "22",
+  id: 22,
     image: shoe1,
     name: "runing shoe for men",
      price: 3990,
@@ -123,7 +123,7 @@ function App() {
     
   },
    {
-  id: "23",
+  id: 23,
     image: shoe2 ,
     name: "runing shoe for men",
      price: 3990,
@@ -131,7 +131,7 @@ function App() {
     
   },
    {
-  id: "24",
+  id: 24,
     image: shoe3 ,
     name: "runing shoe for men",
      price: 3990,
@@ -147,11 +147,11 @@ function App() {
    
     },
   {
-    id: "20",
+    id: 20,
     image: men3 ,
     name: "men golf polo t-shirt blue",
      price: 1090,
-    categorie: 'men'
+    categorie: 'clothes'
     
   },
   
@@ -165,16 +165,16 @@ function App() {
     
   },
    {
-    id: "19",
+    id: 19,
     image: men2,
     name: "men-cozy zip-up hoodie red",
      price: 2990,
-    categorie: 'men'
+    categorie: 'clothes'
     
   },
    
    {
-    id: "7",
+    id: 7,
     image: plainh,
     name: "Plain Hooded  Sweatshirt",
      price: 1560,
