@@ -8,12 +8,14 @@ import { useCart } from './CartContext';
 const NavBar = ({categories, product}) => {
   console.log(product);
   
-   const {totalQuantity} = useCart()
+   const {totalProduct} = useCart()
   const [open, setOpen] = useState(false);
   const [searchToggle, setSearchToggle] = useState(false);
   const [menuToggle, setMenuToggle] = useState(false);
  
-     const [searchItems,setSearchItems] = useState()
+     const [searchItems,setSearchItems] = useState('')
+     const [searchResults, setSearchResults] = useState([]);
+
 
 
   function handleSearchToggle(val) {
@@ -24,18 +26,37 @@ const NavBar = ({categories, product}) => {
   }
 
   function handleSearchInput(e) {
-    const value = e.target.value
-    setSearchItems(value)
-    
-    const checkCategory = categories.find( cat => cat.toLowerCase().includes(value.toLowerCase()));
+  const value = e.target.value;
+  setSearchItems(value); // store the input text
+  
+  if (value.trim() === "") {
+    setSearchResults([]);
+    return;
+  }
+  
+  const checkCategory = categories.find(cat =>
+    cat.toLowerCase().includes(value.toLowerCase())
+  );
 
-    if(checkCategory){
-      const machedproduct = product.filter(product => product.categorie === checkCategory)
-      setSearchItems(machedproduct)
-    } else{
-      setSearchItems([])
-    }
-  } 
+  if (checkCategory) {
+    const matchedProduct = product.filter(
+      p => p.categorie === checkCategory
+    );
+    setSearchResults(matchedProduct);
+  } else {
+    setSearchResults([]);
+  }
+}
+
+function handleSearchSubmit(e) {
+  e.preventDefault();
+  
+  
+  setSearchItems("");
+  setSearchResults([]);
+}
+
+
 
   return (
     <div>
@@ -71,7 +92,7 @@ const NavBar = ({categories, product}) => {
             </div>
           </div>
           <div className="hidden md:block">
-            <form action="">
+            <form onSubmit={handleSearchSubmit}>
               <div className="flex items-center w-[16rem] relative bg-gray-200 rounded-lg shadow-sm border focus-within:ring-2 focus-within:ring-gray-400 transition">
                 <input
                 value={searchItems}
@@ -80,18 +101,17 @@ const NavBar = ({categories, product}) => {
                   placeholder="Search category (e.g., shoes)..."
                   className="w-full p-2 pl-4 pr-12 text-sm rounded-lg outline-none bg-transparent"
                 />
-                {/* {searchItems.length > 0 && (
-                  <div>
-                    <h1>Product</h1>
-                  {searchItems.map(item =>(
-                    <div key={item.id}>
-                      <p>{item.name}</p>
-                    </div>
-                  ))}
-                  </div>
-                  
-                )} */}
+                { searchResults.length > 0 && (
+                  <div className="absolute top-5 bg-white shadow-lg rounded-md w-full mt-2 max-h-60 overflow-y-auto">
+                    {searchResults.map((item) => (
+                      <div key={item.id} >
+                        <p>{item.name}</p>
+                      </div>
+                    ))}
+                 </div>
+                ) }
                 <button
+                   
                   type="submit"
                   className="absolute right-0 top-1/2 -translate-y-1/2 bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-r-lg transition"
                 >
@@ -109,9 +129,9 @@ const NavBar = ({categories, product}) => {
               <div className="relative">
                 <Link to='/cart'>
                 <FiShoppingCart className="w-8 h-8" />
-                {totalQuantity > 0 && (
+                {totalProduct > 0 && (
                   <span className="absolute -top-2 -right-2 bg-orange-700 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">
-                  {totalQuantity}
+                  {totalProduct}
                 </span>
                 )}
                 
@@ -186,13 +206,24 @@ const NavBar = ({categories, product}) => {
               : 'hidden'
           }
         >
-          <form action="" className="w-full">
+          <form action="" onSubmit={handleSearchSubmit} className="w-full">
             <div className="flex items-center relative w-full">
               <input
+               value={searchItems}
+               onChange={handleSearchInput}
                 type="text"
                 placeholder="Search items..."
                 className="w-full p-2 pl-4 pr-12 text-sm rounded-lg bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-400 transition"
               />
+              { searchResults.length > 0 && (
+                  <div className="absolute top-5 bg-white shadow-lg rounded-md w-full mt-2 max-h-60 z-20  overflow-y-auto">
+                    {searchResults.map((item) => (
+                      <div key={item.id} className='px-3' >
+                        <p>{item.name}</p>
+                      </div>
+                    ))}
+                 </div>
+                ) }
               <button
                 type="submit"
                 className="absolute right-0 top-1/2 -translate-y-1/2 bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-r-lg"

@@ -6,13 +6,13 @@ import { useCart } from './CartContext';
 
 const Cart = () => {
     const [com,setCom] = useState(false)
-    const{ addToCart, handleDelete, reduceFromCart, cart,totalQuantity} =useCart();
+    const{ addToCart, totalProduct, handleDelete, reduceFromCart, cart,totalQuantity} =useCart();
 
       const totalAmount = cart.reduce((acc, item) => {
         return acc + item.quantity * parseFloat(item.price);
         }, 0).toFixed(2);
 
-      
+    
 
 
   return (
@@ -50,7 +50,8 @@ const Cart = () => {
             </div>
             <div className=''>
                 <p>{item.name}</p>
-                <p className=' text-orange-500'>${(item.price / 100).toFixed(2)}</p>
+                <p>{item.totalProduct}</p>
+                <p className=' text-orange-500'>${(item.price * item.quantity / 100).toFixed(2)}</p>
                 <p className="font-semibold">Quantity:</p>
                 <div className="flex items-center mt-3 gap-2">
                 <button onClick={() => reduceFromCart(item)}  className="p-1 rounded bg-gray-200 hover:bg-gray-300" >

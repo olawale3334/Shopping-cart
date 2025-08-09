@@ -52,12 +52,13 @@ const CartContext = ( {children}) => {
        
 
       const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const totalProduct = cart.length
       
 
 
   return (
     <div>
-       <cartContext.Provider value={{ cart,addToCart, handleDelete, reduceFromCart,totalQuantity}}>
+       <cartContext.Provider value={{ cart,addToCart, totalProduct, handleDelete, reduceFromCart,totalQuantity}}>
         {children}
        </cartContext.Provider>
     </div>
